@@ -9,6 +9,7 @@ import me.muhaimin.restaurantreview.data.response.PostReviewResponse
 import me.muhaimin.restaurantreview.data.response.Restaurant
 import me.muhaimin.restaurantreview.data.response.RestaurantResponse
 import me.muhaimin.restaurantreview.data.retrofit.ApiConfig
+import me.muhaimin.restaurantreview.utils.Event
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +23,9 @@ class MainViewModel: ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _snackBarText = MutableLiveData<Event<String>>()
+    val snackbarText: LiveData<Event<String>> = _snackBarText
 
     companion object {
         private const val TAG = "MainViewModel"
@@ -70,6 +74,7 @@ class MainViewModel: ViewModel() {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _listReview.value = response.body()?.customerReviews
+                    _snackBarText.value = Event(response.body()?.message.toString())
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
