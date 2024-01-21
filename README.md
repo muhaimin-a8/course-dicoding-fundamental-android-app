@@ -3,7 +3,9 @@ Project on Course [Learn Fundamental Android Development](https://www.dicoding.c
 
 ### Aims
 - use JUnit for unit testing
+- UI testing with Espresso
 
 ### Topics Covered
 - JUnit
 - Unit Test
+- UI Test
